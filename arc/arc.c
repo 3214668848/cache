@@ -1,6 +1,4 @@
-#include<unistd.h>
 #include"hash.c"
-#include<time.h>
 
 
 
