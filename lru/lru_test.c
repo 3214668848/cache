@@ -1,11 +1,11 @@
 #include<unistd.h>
 #include<time.h>
 #include<stdlib.h>
-#include"lirs.c"
+#include"lru.c"
 
 
 void main(){
-    hash_init(5000);
+    hash_init(1000);
     init(1000);
     int i=0;
     int sum=0;
@@ -24,24 +24,26 @@ void main(){
             strcat(name,arr);
         }
         printf("----->name:%s\n",name);
-        ip=lirs_search_cache(name);
+        ip=lru_search_cache(name);
         printf("----->ip:%s\n",ip);
         if(!ip){
             ip=(char *)malloc(15);
             printf("ip not exist\n");
             j=0;
             for(;j<2;j++){
-                c=(rand()%(122-97))+97;
-                char arr[2]={c,'\0'};
-                strcat(ip,arr);
+            c=(rand()%(122-97))+97;
+            char arr[2]={c,'\0'};
+            strcat(ip,arr);
             }
             printf("----->new ip:%s\n",ip);
-            lirs_put_into_cache(name,ip);
+            lru_put_into_cache(name,ip);
         }
         else{ 
-            printf("------------->i found it\n"); 
+            printf("------------->i found it\n");
             sum++;
         }
-    }
+    }   
     printf("the sum of hits during 100000 accesses is:%d\n",sum);
 }
+
+
